@@ -1,3 +1,26 @@
+class SoundManager {
+    constructor() {
+        this.currentSound = null;
+    }
+
+    playSound(sound) {
+        if (this.currentSound && this.currentSound !== sound) {
+            this.currentSound.pause();
+            this.currentSound.currentTime = 0;
+        }
+
+        if (sound === this.currentSound) {
+            sound.pause();
+            sound.currentTime = 0;
+            this.currentSound = null;
+        } else {
+            sound.play();
+            this.currentSound = sound;
+        }
+    }
+}
+
+const soundManager = new SoundManager();
 
 const bleach = document.getElementById("bleach");
 const onepiece = document.getElementById("onepiece");
@@ -9,55 +32,40 @@ const SadnessSorrow = document.getElementById("SadnessSorrow");
 const UnmeiNoHi = document.getElementById ("UnmeiNoHi");
 const NumberOne = document.getElementById ("NumberOne");
 
-
 document.addEventListener('keypress', (press) => {
     if (press.key == "o" ) {
         Overtaken.style.animation = "btn1 0.1s linear"
         setTimeout(() => {
-            main.style.removeProperty('animation')
+            Overtaken.style.removeProperty('animation')
         }, 100)
-        onepiece.pause();
-        onepiece.currentTime = 0;
-        onepiece.play();
+        soundManager.playSound(onepiece);
     } else if (press.key == "n") {
         SadnessSorrow.style.animation = "btn3 0.1s linear"
         setTimeout(() => {
             SadnessSorrow.style.removeProperty('animation')
         }, 100)
-        naruto.pause();
-        naruto.currentTime = 0;
-        naruto.play();
+        soundManager.playSound(naruto);
     } else if (press.key == "d") {
         UnmeiNoHi.style.animation = "btn2  0.1s linear"
         setTimeout(() => {
             UnmeiNoHi.style.removeProperty('animation')
         }, 100)
-        dbz.pause();
-        dbz.currentTime = 0;
-        dbz.play();
+        soundManager.playSound(dbz);
     } else if (press.key == "b") {
         NumberOne.style.animation = "btn4 0.1s linear"
         setTimeout(() => {
-            NumberOne.style.removeProperty('NumberOne')
+            NumberOne.style.removeProperty('animation')
         }, 100)
-        bleach.pause();
-        bleach.currentTime = 0;
-        bleach.play();
-        
+        soundManager.playSound(bleach);
     }
 })
-
-let count = 0
-
 
 Overtaken.addEventListener("click", () => {
     Overtaken.style.animation = "btn1 0.25s linear"
         setTimeout(() => {
             Overtaken.style.removeProperty('animation')
         }, 250)
-        onepiece.pause();
-        onepiece.currentTime = 0;
-        onepiece.play();
+        soundManager.playSound(onepiece);
 })
 
 UnmeiNoHi.addEventListener("click", () => {
@@ -65,9 +73,7 @@ UnmeiNoHi.addEventListener("click", () => {
         setTimeout(() => {
             UnmeiNoHi.style.removeProperty('animation')
         }, 250)
-        dbz.pause();
-        dbz.currentTime = 0;
-        dbz.play();
+        soundManager.playSound(dbz);
 })
 
 SadnessSorrow.addEventListener("click", () => {
@@ -75,9 +81,7 @@ SadnessSorrow.addEventListener("click", () => {
         setTimeout(() => {
             SadnessSorrow.style.removeProperty('animation')
         }, 250)
-        naruto.pause();
-        naruto.currentTime = 0;
-        naruto.play();
+        soundManager.playSound(naruto);
 })
 
 NumberOne.addEventListener("click", () => {
@@ -85,7 +89,5 @@ NumberOne.addEventListener("click", () => {
         setTimeout(() => {
             NumberOne.style.removeProperty('animation')
         }, 250)
-        bleach.pause();
-        bleach.currentTime = 0;
-        bleach.play();
+        soundManager.playSound(bleach);
 })
